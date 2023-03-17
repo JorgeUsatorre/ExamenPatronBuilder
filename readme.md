@@ -34,3 +34,43 @@ para crear objetos de tipo Estudiante en una clase "EstudianteBuilder"
 
 Las clases de trabajador y estudiante extienden de la clase PersonaBuilder y contienen atributos como trabajoActual, fechainicioTrabajo, carreraEstudiada, añoDeEstudio...
 esta clase tambien tendra diferentes metodos como getters y setter y el metodo build();
+
+# Código 
+
+public abstract class PersonaBuilderFactory {
+
+public abstract PersonaBuilder crearPersonaBuilder(String nombre, int edad, String direccion, String telefono, String email);
+
+    public static PersonaBuilder getPersonaBuilder(String tipo, String nombre, int edad, String direccion, String telefono, String email) {
+        if (tipo.equals("estudiante")) {
+            return new EstudianteBuilder(nombre, edad, direccion, telefono, email);
+        } else if (tipo.equals("profesor")) {
+            return new ProfesorBuilder(nombre, edad, direccion, telefono, email);
+        } else {
+            throw new IllegalArgumentException("Tipo de persona no válido.");
+        }
+    }
+}
+
+    private static class EstudianteBuilder extends PersonaBuilder {
+        private String matricula;
+        private String carrera;
+
+        public EstudianteBuilder setMatricula(String matricula) {
+            this.matricula = matricula;
+            return this;
+        }
+
+        public EstudianteBuilder setCarrera(String carrera) {
+            this.carrera = carrera;
+            return this;
+        }
+
+        @Override
+        public Persona build() {
+            Persona persona = super.build();
+            persona.setMatricula(matricula);
+            persona.setCarrera(carrera);
+            return persona;
+        }
+    }
