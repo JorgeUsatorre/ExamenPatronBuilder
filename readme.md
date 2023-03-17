@@ -7,26 +7,6 @@ Posteriormente crearemos la clase Builder en la cual crearemos un objeto de tipo
 clase main crearemos diferentes objetos de personas a los cuales le podremos meter diferentes atributos gracias a sus respectivos métodos y acompañado del metodo build()
 
 
-# Diagrama proyecto
-
-```mermaid
-    classDiagram
-      Main "1" *-- "1..*" BuilderPizza : association
-      class Main{
-          +main()
-      }
-      class BuilderPizza{
-          +build()
-      }
-      
-      BuilderPizza *-- "1" Pizzas : associatioon
-      class Pizzas{
-        +Pizzas()
-      }
-      
-
-```
-
 # Diagrama Ejemplo
 
 ```mermaid
@@ -45,3 +25,12 @@ class Projecto{
 }
 
 ```
+
+# ¿Podríamos combinarlo con el patrón Factory? 
+Sí, se podría combinar el patrón de diseño "Builder" con el patrón de diseño "Factory". La idea sería tener una clase "PersonaFactory" que tenga un método que devuelva un objeto de la clase "PersonaBuilder".
+
+Para implementar la combinacion de los patrones Builder y Factory podriamos crear una clase abstracta llamada "PersonaBuilderFactory" que contenga un metodo llamado "crearPersonaBuilder". Esta clase tendría dos subclase, una para crear objetos de tipo Trabajador en una clase "TrabajadorBuilder" y otra
+para crear objetos de tipo Estudiante en una clase "EstudianteBuilder"
+
+Las clases de trabajador y estudiante extienden de la clase PersonaBuilder y contienen atributos como trabajoActual, fechainicioTrabajo, carreraEstudiada, añoDeEstudio...
+esta clase tambien tendra diferentes metodos como getters y setter y el metodo build();
